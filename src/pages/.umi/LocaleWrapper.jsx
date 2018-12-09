@@ -21,28 +21,28 @@ const defaultAntd = require('antd/lib/locale-provider/zh_CN');
 
 const localeInfo = {
   'en-US': {
-    messages: require('D:/Codes/hi-antd/src/locales/en-US.js').default,
+    messages: require('/Users/zhangsongyun/abp_antd/src/locales/en-US.js').default,
     locale: 'en-US',
     antd: require('antd/lib/locale-provider/en_US'),
     data: require('react-intl/locale-data/en'),
     momentLocale: '',
   },
   'pt-BR': {
-    messages: require('D:/Codes/hi-antd/src/locales/pt-BR.js').default,
+    messages: require('/Users/zhangsongyun/abp_antd/src/locales/pt-BR.js').default,
     locale: 'pt-BR',
     antd: require('antd/lib/locale-provider/pt_BR'),
     data: require('react-intl/locale-data/pt'),
     momentLocale: 'pt-br',
   },
   'zh-CN': {
-    messages: require('D:/Codes/hi-antd/src/locales/zh-CN.js').default,
+    messages: require('/Users/zhangsongyun/abp_antd/src/locales/zh-CN.js').default,
     locale: 'zh-CN',
     antd: require('antd/lib/locale-provider/zh_CN'),
     data: require('react-intl/locale-data/zh'),
     momentLocale: 'zh-cn',
   },
   'zh-TW': {
-    messages: require('D:/Codes/hi-antd/src/locales/zh-TW.js').default,
+    messages: require('/Users/zhangsongyun/abp_antd/src/locales/zh-TW.js').default,
     locale: 'zh-TW',
     antd: require('antd/lib/locale-provider/zh_TW'),
     data: require('react-intl/locale-data/zh'),
