@@ -1,57 +1,59 @@
-import { query as queryUsers, queryCurrent, test } from '@/services/user';
-import { setPermissions } from '../utils/permissions';
+import { query as queryUsers, queryCurrent, test } from "@/services/user";
+import { setPermissions } from "../utils/permissions";
 
 export default {
-  namespace: 'user',
+  namespace: "user",
 
   state: {
     list: [],
     currentUser: {},
-    test: {},
+    test: {}
   },
 
   effects: {
     *fetch(_, { call, put }) {
       const response = yield call(queryUsers);
       yield put({
-        type: 'save',
-        payload: response,
+        type: "save",
+        payload: response
       });
     },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({
-        type: 'saveCurrentUser',
-        payload: response,
+        type: "saveCurrentUser",
+        payload: response
       });
     },
     *fetchTest(_, { call, put }) {
       const response = yield call(test);
-      setPermissions(response.result.auth.grantedPermissions);
+      var permissions = Object.keys(response.result.auth.grantedPermissions);
+
+      setPermissions(permissions);
       yield put({
-        type: 'test',
-        payload: response,
+        type: "test",
+        payload: response
       });
-    },
+    }
   },
 
   reducers: {
     test(state, action) {
       return {
         ...state,
-        test: action.payload,
+        test: action.payload
       };
     },
     save(state, action) {
       return {
         ...state,
-        list: action.payload,
+        list: action.payload
       };
     },
     saveCurrentUser(state, action) {
       return {
         ...state,
-        currentUser: action.payload || {},
+        currentUser: action.payload || {}
       };
     },
     changeNotifyCount(state, action) {
@@ -60,9 +62,9 @@ export default {
         currentUser: {
           ...state.currentUser,
           notifyCount: action.payload.totalCount,
-          unreadCount: action.payload.unreadCount,
-        },
+          unreadCount: action.payload.unreadCount
+        }
       };
-    },
-  },
+    }
+  }
 };

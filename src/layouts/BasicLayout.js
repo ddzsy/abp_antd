@@ -1,53 +1,54 @@
-import React, { Suspense } from 'react';
-import { Layout } from 'antd';
-import DocumentTitle from 'react-document-title';
-import isEqual from 'lodash/isEqual';
-import memoizeOne from 'memoize-one';
-import { connect } from 'dva';
-import { ContainerQuery } from 'react-container-query';
-import classNames from 'classnames';
-import pathToRegexp from 'path-to-regexp';
-import Media from 'react-media';
-import { formatMessage } from 'umi/locale';
-import Authorized from '@/utils/Authorized';
-import logo from '../assets/logo.svg';
-import Footer from './Footer';
-import Header from './Header';
-import Context from './MenuContext';
-import Exception403 from '../pages/Exception/403';
-import PageLoading from '@/components/PageLoading';
-import SiderMenu from '@/components/SiderMenu';
+import React, { Suspense } from "react";
+import { Layout } from "antd";
+import DocumentTitle from "react-document-title";
+import isEqual from "lodash/isEqual";
+import memoizeOne from "memoize-one";
+import { connect } from "dva";
+import { ContainerQuery } from "react-container-query";
+import classNames from "classnames";
+import pathToRegexp from "path-to-regexp";
+import Media from "react-media";
+import { formatMessage } from "umi/locale";
+import Authorized from "@/utils/Authorized";
+// import Authorized from '@/utils/Permitted';
+import logo from "../assets/logo.svg";
+import Footer from "./Footer";
+import Header from "./Header";
+import Context from "./MenuContext";
+import Exception403 from "../pages/Exception/403";
+import PageLoading from "@/components/PageLoading";
+import SiderMenu from "@/components/SiderMenu";
 
-import styles from './BasicLayout.less';
+import styles from "./BasicLayout.less";
 
 // lazy load SettingDrawer
-const SettingDrawer = React.lazy(() => import('@/components/SettingDrawer'));
+const SettingDrawer = React.lazy(() => import("@/components/SettingDrawer"));
 
 const { Content } = Layout;
 
 const query = {
-  'screen-xs': {
-    maxWidth: 575,
+  "screen-xs": {
+    maxWidth: 575
   },
-  'screen-sm': {
+  "screen-sm": {
     minWidth: 576,
-    maxWidth: 767,
+    maxWidth: 767
   },
-  'screen-md': {
+  "screen-md": {
     minWidth: 768,
-    maxWidth: 991,
+    maxWidth: 991
   },
-  'screen-lg': {
+  "screen-lg": {
     minWidth: 992,
-    maxWidth: 1199,
+    maxWidth: 1199
   },
-  'screen-xl': {
+  "screen-xl": {
     minWidth: 1200,
-    maxWidth: 1599,
+    maxWidth: 1599
   },
-  'screen-xxl': {
-    minWidth: 1600,
-  },
+  "screen-xxl": {
+    minWidth: 1600
+  }
 };
 
 class BasicLayout extends React.PureComponent {
@@ -60,17 +61,17 @@ class BasicLayout extends React.PureComponent {
   componentDidMount() {
     const {
       dispatch,
-      route: { routes, authority },
+      route: { routes, authority }
     } = this.props;
     dispatch({
-      type: 'user/fetchCurrent',
+      type: "user/fetchCurrent"
     });
     dispatch({
-      type: 'setting/getSetting',
+      type: "setting/getSetting"
     });
     dispatch({
-      type: 'menu/getMenuData',
-      payload: { routes, authority },
+      type: "menu/getMenuData",
+      payload: { routes, authority }
     });
   }
 
@@ -87,17 +88,19 @@ class BasicLayout extends React.PureComponent {
     const { location, breadcrumbNameMap } = this.props;
     return {
       location,
-      breadcrumbNameMap,
+      breadcrumbNameMap
     };
   }
 
   matchParamsPath = (pathname, breadcrumbNameMap) => {
-    const pathKey = Object.keys(breadcrumbNameMap).find(key => pathToRegexp(key).test(pathname));
+    const pathKey = Object.keys(breadcrumbNameMap).find(key =>
+      pathToRegexp(key).test(pathname)
+    );
     return breadcrumbNameMap[pathKey];
   };
 
   getRouterAuthority = (pathname, routeData) => {
-    let routeAuthority = ['noAuthority'];
+    let routeAuthority = ["noAuthority"];
     const getAuthority = (key, routes) => {
       routes.map(route => {
         if (route.path === key) {
@@ -116,11 +119,11 @@ class BasicLayout extends React.PureComponent {
     const currRouterData = this.matchParamsPath(pathname, breadcrumbNameMap);
 
     if (!currRouterData) {
-      return 'Ant Design Pro';
+      return "Ant Design Pro";
     }
     const pageName = formatMessage({
       id: currRouterData.locale || currRouterData.name,
-      defaultMessage: currRouterData.name,
+      defaultMessage: currRouterData.name
     });
 
     return `${pageName} - Ant Design Pro`;
@@ -128,9 +131,9 @@ class BasicLayout extends React.PureComponent {
 
   getLayoutStyle = () => {
     const { fixSiderbar, isMobile, collapsed, layout } = this.props;
-    if (fixSiderbar && layout !== 'topmenu' && !isMobile) {
+    if (fixSiderbar && layout !== "topmenu" && !isMobile) {
       return {
-        paddingLeft: collapsed ? '80px' : '256px',
+        paddingLeft: collapsed ? "80px" : "256px"
       };
     }
     return null;
@@ -139,15 +142,15 @@ class BasicLayout extends React.PureComponent {
   handleMenuCollapse = collapsed => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'global/changeLayoutCollapsed',
-      payload: collapsed,
+      type: "global/changeLayoutCollapsed",
+      payload: collapsed
     });
   };
 
   renderSettingDrawer = () => {
     // Do not render SettingDrawer in production
     // unless it is deployed in preview.pro.ant.design as demo
-    if (process.env.NODE_ENV === 'production' && APP_TYPE !== 'site') {
+    if (process.env.NODE_ENV === "production" && APP_TYPE !== "site") {
       return null;
     }
     return <SettingDrawer />;
@@ -163,10 +166,10 @@ class BasicLayout extends React.PureComponent {
       menuData,
       breadcrumbNameMap,
       route: { routes },
-      fixedHeader,
+      fixedHeader
     } = this.props;
 
-    const isTop = PropsLayout === 'topmenu';
+    const isTop = PropsLayout === "topmenu";
     const routerConfig = this.getRouterAuthority(pathname, routes);
     const contentStyle = !fixedHeader ? { paddingTop: 0 } : {};
     const layout = (
@@ -184,7 +187,7 @@ class BasicLayout extends React.PureComponent {
         <Layout
           style={{
             ...this.getLayoutStyle(),
-            minHeight: '100vh',
+            minHeight: "100vh"
           }}
         >
           <Header
@@ -214,7 +217,9 @@ class BasicLayout extends React.PureComponent {
             )}
           </ContainerQuery>
         </DocumentTitle>
-        <Suspense fallback={<PageLoading />}>{this.renderSettingDrawer()}</Suspense>
+        <Suspense fallback={<PageLoading />}>
+          {this.renderSettingDrawer()}
+        </Suspense>
       </React.Fragment>
     );
   }
@@ -225,7 +230,7 @@ export default connect(({ global, setting, menu }) => ({
   layout: setting.layout,
   menuData: menu.menuData,
   breadcrumbNameMap: menu.breadcrumbNameMap,
-  ...setting,
+  ...setting
 }))(props => (
   <Media query="(max-width: 599px)">
     {isMobile => <BasicLayout {...props} isMobile={isMobile} />}
