@@ -4,16 +4,43 @@ export default {
   namespace: "auditLog",
 
   state: {
-    auditList: [],
-    pagination: {}
+    data: {
+      list: [],
+      pagination: {
+        pageSize: 20
+      }
+    }
   },
 
   effects: {
     *fetchAudit({ payload }, { call, put }) {
+      let yesterday = new Date();
+      yesterday.setDate(new Date().getDate() - 1);
+      if (!payload) {
+        payload = {
+          startDate: yesterday,
+          endDate: new Date(),
+          maxResultCount: 20,
+          skipCount: 0
+        };
+      }
+      if (!payload.startDate) {
+        payload.startDate = yesterday;
+      }
+      if (!payload.endDate) {
+        payload.endDate = new Date();
+      }
       const response = yield call(queryAudit, payload);
+
+      const result = {
+        list: response.result.items,
+        pagination: {
+          total: response.result.totalCount
+        }
+      };
       yield put({
         type: "save",
-        payload: response.result
+        payload: result
       });
     }
   },
@@ -22,8 +49,7 @@ export default {
     save(state, action) {
       return {
         ...state,
-        auditList: action.payload.items,
-        pagination: { total: action.payload.totalCount }
+        data: action.payload
       };
     }
   }
