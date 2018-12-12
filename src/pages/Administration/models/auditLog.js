@@ -6,9 +6,7 @@ export default {
   state: {
     data: {
       list: [],
-      pagination: {
-        pageSize: 20
-      }
+      pagination: {}
     }
   },
 
@@ -35,6 +33,8 @@ export default {
       const result = {
         list: response.result.items,
         pagination: {
+          current: payload.skipCount / payload.maxResultCount + 1,
+          pageSize: payload.maxResultCount,
           total: response.result.totalCount
         }
       };
@@ -47,10 +47,14 @@ export default {
 
   reducers: {
     save(state, action) {
-      return {
-        ...state,
-        data: action.payload
+      var newState = { ...state };
+      newState.data.list = action.payload.list;
+      newState.data.pagination = {
+        ...newState.data.pagination,
+        current: action.payload.pagination.current,
+        total: action.payload.pagination.total
       };
+      return newState;
     }
   }
 };

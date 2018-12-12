@@ -1,19 +1,19 @@
-import React, { PureComponent, Suspense } from 'react';
-import { Layout } from 'antd';
-import classNames from 'classnames';
-import Link from 'umi/link';
-import styles from './index.less';
-import PageLoading from '../PageLoading';
-import { getDefaultCollapsedSubMenus } from './SiderMenuUtils';
+import React, { PureComponent, Suspense } from "react";
+import { Layout } from "antd";
+import classNames from "classnames";
+import Link from "umi/link";
+import styles from "./index.less";
+import PageLoading from "../PageLoading";
+import { getDefaultCollapsedSubMenus } from "./SiderMenuUtils";
 
-const BaseMenu = React.lazy(() => import('./BaseMenu'));
+const BaseMenu = React.lazy(() => import("./BaseMenu"));
 const { Sider } = Layout;
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      openKeys: getDefaultCollapsedSubMenus(props),
+      openKeys: getDefaultCollapsedSubMenus(props)
     };
   }
 
@@ -22,7 +22,7 @@ export default class SiderMenu extends PureComponent {
     if (props.location.pathname !== pathname) {
       return {
         pathname: props.location.pathname,
-        openKeys: getDefaultCollapsedSubMenus(props),
+        openKeys: getDefaultCollapsedSubMenus(props)
       };
     }
     return null;
@@ -39,9 +39,10 @@ export default class SiderMenu extends PureComponent {
   };
 
   handleOpenChange = openKeys => {
-    const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
+    const moreThanOne =
+      openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({
-      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys],
+      openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys]
     });
   };
 
@@ -52,7 +53,7 @@ export default class SiderMenu extends PureComponent {
 
     const siderClassName = classNames(styles.sider, {
       [styles.fixSiderbar]: fixSiderbar,
-      [styles.light]: theme === 'light',
+      [styles.light]: theme === "light"
     });
     return (
       <Sider
@@ -68,7 +69,7 @@ export default class SiderMenu extends PureComponent {
         <div className={styles.logo} id="logo">
           <Link to="/">
             <img src={logo} alt="logo" />
-            <h1>Ant Design Pro</h1>
+            <h1>b-One MES</h1>
           </Link>
         </div>
         <Suspense fallback={<PageLoading />}>
@@ -77,7 +78,7 @@ export default class SiderMenu extends PureComponent {
             mode="inline"
             handleOpenChange={this.handleOpenChange}
             onOpenChange={this.handleOpenChange}
-            style={{ padding: '16px 0', width: '100%' }}
+            style={{ padding: "16px 0", width: "100%" }}
             {...defaultProps}
           />
         </Suspense>
