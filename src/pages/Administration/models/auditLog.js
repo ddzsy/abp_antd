@@ -6,7 +6,9 @@ export default {
   state: {
     data: {
       list: [],
-      pagination: {}
+      pagination: {
+        showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`
+      }
     }
   },
 

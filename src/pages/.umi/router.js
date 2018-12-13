@@ -230,9 +230,6 @@ let routes = [
           {
             "path": "/profile/advanced",
             "name": "advanced",
-            "authority": [
-              "admin"
-            ],
             "component": dynamic({ loader: () => import('../Profile/AdvancedProfile'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },

@@ -37,12 +37,25 @@ const Option = Select.Option;
 @Form.create()
 class AuditLogs extends PureComponent {
   state = {
-    msg: "World",
     expandForm: false,
-    selectedRows: []
+    visible: false,
+    modalVisible: false,
+    selectedRows: [],
+    currentLog: undefined
   };
 
   columns = [
+    {
+      title: "操作",
+      key: "action",
+      render: (text, record) => {
+        return (
+          <div>
+            <Icon type="search" onClick={() => this.showModal(record)} />
+          </div>
+        );
+      }
+    },
     {
       title: "状态",
       dataIndex: "exception",
@@ -93,8 +106,10 @@ class AuditLogs extends PureComponent {
     }
   ];
 
+  // TODO: 默认值放在model里会比较好，model中有没有办法aop 来填写payload?
   defaultStartDate = moment(new Date().setDate(new Date().getDate() - 3));
   defaultEndDate = moment(new Date());
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -128,6 +143,8 @@ class AuditLogs extends PureComponent {
     dispatch({
       type: "auditLog/fetchAudit",
       payload: {
+        startDate: this.defaultStartDate.toDate(),
+        endDate: this.defaultEndDate.toDate(),
         skipCount: 0,
         maxResultCount: pagination.pageSize || 20
       }
@@ -199,6 +216,21 @@ class AuditLogs extends PureComponent {
     dispatch({
       type: "auditLog/fetchAudit",
       payload: params
+    });
+  };
+
+  showModal = record => {
+    this.setState({
+      visible: true,
+      currentLog: record
+    });
+  };
+
+  handleDone = () => {
+    // setTimeout(() => this.addBtn.blur(), 0);
+    this.setState({
+      visible: false,
+      currentLog: undefined
     });
   };
 
@@ -285,43 +317,74 @@ class AuditLogs extends PureComponent {
           <Col md={8} sm={24}>
             <FormItem label="调用者">
               {getFieldDecorator("userName")(
-                <Input style={{ width: "100%" }} />
+                <Input placeholder="请填写用户名" style={{ width: "100%" }} />
               )}
             </FormItem>
           </Col>
         </Row>
-        {/* <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
           <Col md={8} sm={24}>
-            <FormItem label="更新日期">
-              {getFieldDecorator("date")(
-                <DatePicker
+            <FormItem label="服务">
+              {getFieldDecorator("serviceName")(
+                <Input placeholder="请填写服务名" style={{ width: "100%" }} />
+              )}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="操作">
+              {getFieldDecorator("methodName")(
+                <Input placeholder="请填写操作名" style={{ width: "100%" }} />
+              )}
+            </FormItem>
+          </Col>
+          <Col md={8} sm={24}>
+            <FormItem label="持续时间">
+              {/* TODO: 封装一个数值范围的组件，消除一个FormItem下多个 getFieldDecorator 的报错*/}
+              <Input.Group compact>
+                {getFieldDecorator("minExecutionDuration")(
+                  <InputNumber
+                    style={{ width: "45%", textAlign: "center" }}
+                    min={0}
+                    formatter={value => `${value}ms`}
+                    parser={value => value.replace("ms", "")}
+                    placeholder="Minimum"
+                  />
+                )}
+                <Input
+                  style={{
+                    width: 30,
+                    borderLeft: 0,
+                    pointerEvents: "none",
+                    backgroundColor: "#fff"
+                  }}
+                  placeholder="~"
+                  disabled
+                />
+                {getFieldDecorator("maxExecutionDuration")(
+                  <InputNumber
+                    style={{ width: "45%", textAlign: "center", borderLeft: 0 }}
+                    min={0}
+                    formatter={value => `${value}ms`}
+                    parser={value => value.replace("ms", "")}
+                    placeholder="Maximum"
+                  />
+                )}
+              </Input.Group>
+            </FormItem>
+          </Col>
+        </Row>
+        <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
+          <Col md={8} sm={24}>
+            <FormItem label="客户端">
+              {getFieldDecorator("browserInfo")(
+                <Input
+                  placeholder="请填写客户端信息"
                   style={{ width: "100%" }}
-                  placeholder="请输入更新日期"
                 />
               )}
             </FormItem>
           </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator("status3")(
-                <Select placeholder="请选择" style={{ width: "100%" }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-          <Col md={8} sm={24}>
-            <FormItem label="使用状态">
-              {getFieldDecorator("status4")(
-                <Select placeholder="请选择" style={{ width: "100%" }}>
-                  <Option value="0">关闭</Option>
-                  <Option value="1">运行中</Option>
-                </Select>
-              )}
-            </FormItem>
-          </Col>
-        </Row> */}
+        </Row>
         <div style={{ overflow: "hidden" }}>
           <div style={{ float: "right", marginBottom: 24 }}>
             <Button type="primary" htmlType="submit">
@@ -344,12 +407,32 @@ class AuditLogs extends PureComponent {
     return expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
+  getFormattedParameters(record) {
+    if (!record) {
+      return {};
+    }
+    try {
+      var json = JSON.parse(record.parameters);
+      return JSON.stringify(json, null, 4);
+    } catch (e) {
+      return record.parameters || {};
+    }
+  }
+
   render() {
     const {
       auditLog: { data },
       loading
     } = this.props;
-    const { msg, selectedRows } = this.state;
+    const { selectedRows, visible, currentLog } = this.state;
+    const modalFooter = { footer: null, onCancel: this.handleDone };
+    const getModalContent = () => {
+      return currentLog ? (
+        <div>{this.getFormattedParameters(currentLog)}</div>
+      ) : (
+        <div />
+      );
+    };
 
     return (
       <PageHeaderWrapper title="审计日志">
@@ -358,6 +441,9 @@ class AuditLogs extends PureComponent {
             <div className={styles.tableListForm}>{this.renderForm()}</div>
             <StandardTable
               rowKey="id"
+              // expandedRowRender={record => <p>{record.parameters}</p>}
+              hideAlert={true}
+              rowSelection={undefined}
               selectedRows={selectedRows}
               loading={loading}
               data={data}
@@ -366,6 +452,17 @@ class AuditLogs extends PureComponent {
             />
           </div>
         </Card>
+        <Modal
+          title={"审计日志详情"}
+          // className={styles.standardListForm}
+          width={640}
+          bodyStyle={{ padding: "72px 0" }}
+          destroyOnClose
+          visible={visible}
+          {...modalFooter}
+        >
+          {getModalContent()}
+        </Modal>
       </PageHeaderWrapper>
     );
   }
