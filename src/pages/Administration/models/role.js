@@ -1,7 +1,7 @@
-import { queryAudit } from "@/services/audit";
+import { queryRole } from "@/services/role";
 
 export default {
-  namespace: "auditLog",
+  namespace: "role",
 
   state: {
     data: {
@@ -13,24 +13,15 @@ export default {
   },
 
   effects: {
-    *fetchAudit({ payload }, { call, put }) {
-      let yesterday = new Date();
-      yesterday.setDate(new Date().getDate() - 1);
+    *fetchRole({ payload }, { call, put }) {
       if (!payload) {
         payload = {
-          startDate: yesterday,
-          endDate: new Date(),
           maxResultCount: 20,
           skipCount: 0
         };
       }
-      if (!payload.startDate) {
-        payload.startDate = yesterday;
-      }
-      if (!payload.endDate) {
-        payload.endDate = new Date();
-      }
-      const response = yield call(queryAudit, payload);
+
+      const response = yield call(queryRole, payload);
       if (response.success) {
         const result = {
           list: response.result.items,

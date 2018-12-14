@@ -37,6 +37,8 @@ export default {
   "menu.account.logout": "退出登录",
   "menu.administration": "管理",
   "menu.administration.auditlog": "日志",
+  "menu.administration.role": "角色",
+  "menu.administration.user": "用户",
   "menu.newPage": "新菜单",
   "menu.newPage.index": "新页面"
 };

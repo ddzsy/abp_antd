@@ -31,3 +31,4 @@ app.model({ namespace: 'profile', ...(require('D:/Codes/abp_antd/src/pages/Profi
 app.model({ namespace: 'error', ...(require('D:/Codes/abp_antd/src/pages/Exception/models/error.js').default) });
 app.model({ namespace: 'geographic', ...(require('D:/Codes/abp_antd/src/pages/Account/Settings/models/geographic.js').default) });
 app.model({ namespace: 'auditLog', ...(require('D:/Codes/abp_antd/src/pages/Administration/models/auditLog.js').default) });
+app.model({ namespace: 'role', ...(require('D:/Codes/abp_antd/src/pages/Administration/models/role.js').default) });

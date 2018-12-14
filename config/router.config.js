@@ -292,6 +292,20 @@ export default [
         authority: ["Pages.Administration"],
         routes: [
           {
+            path: "/admin/role",
+            name: "role",
+            authority: ["Pages.Administration.Roles"],
+            icon: "team",
+            component: "./Administration/Role"
+          },
+          {
+            path: "/admin/user",
+            name: "user",
+            authority: ["Pages.Administration.Users"],
+            icon: "user",
+            component: "./Administration/User"
+          },
+          {
             path: "/admin/auditlog",
             name: "auditlog",
             authority: ["Pages.Administration.AuditLogs"],

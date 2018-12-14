@@ -379,6 +379,26 @@ let routes = [
         ],
         "routes": [
           {
+            "path": "/admin/role",
+            "name": "role",
+            "authority": [
+              "Pages.Administration.Roles"
+            ],
+            "icon": "team",
+            "component": dynamic({ loader: () => import('../Administration/Role'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "exact": true
+          },
+          {
+            "path": "/admin/user",
+            "name": "user",
+            "authority": [
+              "Pages.Administration.Users"
+            ],
+            "icon": "user",
+            "component": dynamic({ loader: () => import('../Administration/User'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "exact": true
+          },
+          {
             "path": "/admin/auditlog",
             "name": "auditlog",
             "authority": [
