@@ -34,13 +34,13 @@ export default class TopNavHeader extends PureComponent {
           }}
           className={`${styles.main} ${
             contentWidth === "Fixed" ? styles.wide : ""
-          }`}
+            }`}
         >
           <div className={styles.left}>
             <div className={styles.logo} key="logo" id="logo">
               <Link to="/">
                 <img src={logo} alt="logo" />
-                <h1>b-One MES</h1>
+                <h1>Ant Design Pro</h1>
               </Link>
             </div>
             <div

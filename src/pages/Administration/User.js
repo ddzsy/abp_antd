@@ -47,19 +47,23 @@ class User extends PureComponent {
   columns = [
     {
       title: "用户名",
+      width: 90,
       dataIndex: "userName"
     },
     {
       title: "姓氏",
+      width: 80,
       dataIndex: "surname"
     },
     {
       title: "名字",
+      width: 80,
       dataIndex: "name"
     },
     {
       title: "角色",
       dataIndex: "roles",
+      width: 120,
       render: val => (
         <span>
           {val.reduce((pre, cur) => {
@@ -73,17 +77,20 @@ class User extends PureComponent {
     },
     {
       title: "邮箱地址",
+      width: 230,
       dataIndex: "emailAddress"
     },
     {
       title: "最近登录",
       dataIndex: "lastLoginTime",
+      width: 120,
       sorter: true,
       render: val => <span>{moment(val).format("YYYY-MM-DD HH:mm:ss")}</span>
     },
     {
       title: "创建时间",
       dataIndex: "creationTime",
+      width: 120,
       sorter: true,
       render: val => <span>{moment(val).format("YYYY-MM-DD HH:mm:ss")}</span>
     },
@@ -275,8 +282,8 @@ class User extends PureComponent {
       return currentLog ? (
         <div>{this.getFormattedParameters(currentLog)}</div>
       ) : (
-        <div />
-      );
+          <div />
+        );
     };
 
     return (

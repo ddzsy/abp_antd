@@ -2,14 +2,14 @@ import React from 'react';
 import { Router as DefaultRouter, Route, Switch } from 'react-router-dom';
 import dynamic from 'umi/dynamic';
 import renderRoutes from 'umi/_renderRoutes';
-import RendererWrapper0 from 'D:/Codes/abp_antd/src/pages/.umi/LocaleWrapper.jsx'
+import RendererWrapper0 from '/Users/zhangsongyun/abp_antd/src/pages/.umi/LocaleWrapper.jsx'
 
 let Router = require('dva/router').routerRedux.ConnectedRouter;
 
 let routes = [
   {
     "path": "/newLayoutPage",
-    "component": dynamic({ loader: () => import('../../layouts/UserLayout'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+    "component": dynamic({ loader: () => import('../../layouts/UserLayout'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
     "routes": [
       {
         "path": "/newLayoutPage",
@@ -18,17 +18,17 @@ let routes = [
       },
       {
         "path": "/newLayoutPage/index",
-        "component": dynamic({ loader: () => import('../NewLayoutPage/Index'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+        "component": dynamic({ loader: () => import('../NewLayoutPage/Index'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
         "exact": true
       },
       {
-        "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
   {
     "path": "/user",
-    "component": dynamic({ loader: () => import('../../layouts/UserLayout'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+    "component": dynamic({ loader: () => import('../../layouts/UserLayout'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
     "routes": [
       {
         "path": "/user",
@@ -37,27 +37,27 @@ let routes = [
       },
       {
         "path": "/user/login",
-        "component": dynamic({ loader: () => import('../User/Login'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+        "component": dynamic({ loader: () => import('../User/Login'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
         "exact": true
       },
       {
         "path": "/user/register",
-        "component": dynamic({ loader: () => import('../User/Register'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+        "component": dynamic({ loader: () => import('../User/Register'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
         "exact": true
       },
       {
         "path": "/user/register-result",
-        "component": dynamic({ loader: () => import('../User/RegisterResult'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+        "component": dynamic({ loader: () => import('../User/RegisterResult'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
         "exact": true
       },
       {
-        "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
   {
     "path": "/",
-    "component": dynamic({ loader: () => import('../../layouts/BasicLayout'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+    "component": dynamic({ loader: () => import('../../layouts/BasicLayout'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
     "Routes": [require('../Authorized').default],
     "authority": [
       "Pages"
@@ -76,23 +76,23 @@ let routes = [
           {
             "path": "/dashboard/analysis",
             "name": "analysis",
-            "component": dynamic({ loader: () => import('../Dashboard/Analysis'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Dashboard/Analysis'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/dashboard/monitor",
             "name": "monitor",
-            "component": dynamic({ loader: () => import('../Dashboard/Monitor'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Dashboard/Monitor'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/dashboard/workplace",
             "name": "workplace",
-            "component": dynamic({ loader: () => import('../Dashboard/Workplace'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Dashboard/Workplace'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -104,13 +104,13 @@ let routes = [
           {
             "path": "/form/basic-form",
             "name": "basicform",
-            "component": dynamic({ loader: () => import('../Forms/BasicForm'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Forms/BasicForm'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/form/step-form",
             "name": "stepform",
-            "component": dynamic({ loader: () => import('../Forms/StepForm'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Forms/StepForm'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "hideChildrenInMenu": true,
             "routes": [
               {
@@ -121,23 +121,23 @@ let routes = [
               {
                 "path": "/form/step-form/info",
                 "name": "info",
-                "component": dynamic({ loader: () => import('../Forms/StepForm/Step1'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Forms/StepForm/Step1'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/form/step-form/confirm",
                 "name": "confirm",
-                "component": dynamic({ loader: () => import('../Forms/StepForm/Step2'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Forms/StepForm/Step2'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/form/step-form/result",
                 "name": "result",
-                "component": dynamic({ loader: () => import('../Forms/StepForm/Step3'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Forms/StepForm/Step3'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
@@ -147,11 +147,11 @@ let routes = [
             "authority": [
               "admin"
             ],
-            "component": dynamic({ loader: () => import('../Forms/AdvancedForm'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Forms/AdvancedForm'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -163,25 +163,25 @@ let routes = [
           {
             "path": "/list/table-list",
             "name": "searchtable",
-            "component": dynamic({ loader: () => import('../List/TableList'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../List/TableList'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/list/basic-list",
             "name": "basiclist",
-            "component": dynamic({ loader: () => import('../List/BasicList'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../List/BasicList'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/list/card-list",
             "name": "cardlist",
-            "component": dynamic({ loader: () => import('../List/CardList'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../List/CardList'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/list/search",
             "name": "searchlist",
-            "component": dynamic({ loader: () => import('../List/List'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../List/List'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "routes": [
               {
                 "path": "/list/search",
@@ -191,28 +191,28 @@ let routes = [
               {
                 "path": "/list/search/articles",
                 "name": "articles",
-                "component": dynamic({ loader: () => import('../List/Articles'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../List/Articles'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/list/search/projects",
                 "name": "projects",
-                "component": dynamic({ loader: () => import('../List/Projects'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../List/Projects'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/list/search/applications",
                 "name": "applications",
-                "component": dynamic({ loader: () => import('../List/Applications'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../List/Applications'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -224,17 +224,17 @@ let routes = [
           {
             "path": "/profile/basic",
             "name": "basic",
-            "component": dynamic({ loader: () => import('../Profile/BasicProfile'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Profile/BasicProfile'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/profile/advanced",
             "name": "advanced",
-            "component": dynamic({ loader: () => import('../Profile/AdvancedProfile'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Profile/AdvancedProfile'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -246,17 +246,17 @@ let routes = [
           {
             "path": "/result/success",
             "name": "success",
-            "component": dynamic({ loader: () => import('../Result/Success'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Result/Success'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/result/fail",
             "name": "fail",
-            "component": dynamic({ loader: () => import('../Result/Error'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Result/Error'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -268,30 +268,30 @@ let routes = [
           {
             "path": "/exception/403",
             "name": "not-permission",
-            "component": dynamic({ loader: () => import('../Exception/403'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Exception/403'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/exception/404",
             "name": "not-find",
-            "component": dynamic({ loader: () => import('../Exception/404'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Exception/404'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/exception/500",
             "name": "server-error",
-            "component": dynamic({ loader: () => import('../Exception/500'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Exception/500'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
             "path": "/exception/trigger",
             "name": "trigger",
             "hideInMenu": true,
-            "component": dynamic({ loader: () => import('../Exception/TriggerException'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Exception/TriggerException'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -303,7 +303,7 @@ let routes = [
           {
             "path": "/account/center",
             "name": "center",
-            "component": dynamic({ loader: () => import('../Account/Center/Center'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Account/Center/Center'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "routes": [
               {
                 "path": "/account/center",
@@ -312,28 +312,28 @@ let routes = [
               },
               {
                 "path": "/account/center/articles",
-                "component": dynamic({ loader: () => import('../Account/Center/Articles'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Center/Articles'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/account/center/applications",
-                "component": dynamic({ loader: () => import('../Account/Center/Applications'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Center/Applications'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/account/center/projects",
-                "component": dynamic({ loader: () => import('../Account/Center/Projects'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Center/Projects'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
           {
             "path": "/account/settings",
             "name": "settings",
-            "component": dynamic({ loader: () => import('../Account/Settings/Info'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Account/Settings/Info'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "routes": [
               {
                 "path": "/account/settings",
@@ -342,31 +342,31 @@ let routes = [
               },
               {
                 "path": "/account/settings/base",
-                "component": dynamic({ loader: () => import('../Account/Settings/BaseView'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Settings/BaseView'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/account/settings/security",
-                "component": dynamic({ loader: () => import('../Account/Settings/SecurityView'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Settings/SecurityView'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/account/settings/binding",
-                "component": dynamic({ loader: () => import('../Account/Settings/BindingView'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Settings/BindingView'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
                 "path": "/account/settings/notification",
-                "component": dynamic({ loader: () => import('../Account/Settings/NotificationView'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+                "component": dynamic({ loader: () => import('../Account/Settings/NotificationView'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
                 "exact": true
               },
               {
-                "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+                "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
               }
             ]
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
@@ -385,7 +385,7 @@ let routes = [
               "Pages.Administration.Roles"
             ],
             "icon": "team",
-            "component": dynamic({ loader: () => import('../Administration/Role'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Administration/Role'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
@@ -395,7 +395,7 @@ let routes = [
               "Pages.Administration.Users"
             ],
             "icon": "user",
-            "component": dynamic({ loader: () => import('../Administration/User'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Administration/User'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
@@ -405,25 +405,25 @@ let routes = [
               "Pages.Administration.AuditLogs"
             ],
             "icon": "audit",
-            "component": dynamic({ loader: () => import('../Administration/AuditLogs'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+            "component": dynamic({ loader: () => import('../Administration/AuditLogs'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
             "exact": true
           },
           {
-            "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+            "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
           }
         ]
       },
       {
-        "component": dynamic({ loader: () => import('../404'), loading: require('D:/Codes/abp_antd/src/components/PageLoading/index').default }),
+        "component": dynamic({ loader: () => import('../404'), loading: require('/Users/zhangsongyun/abp_antd/src/components/PageLoading/index').default }),
         "exact": true
       },
       {
-        "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+        "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
       }
     ]
   },
   {
-    "component": () => React.createElement(require('D:/Codes/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
+    "component": () => React.createElement(require('/Users/zhangsongyun/abp_antd/node_modules/umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: true })
   }
 ];
 window.g_plugins.applyForEach('patchRoutes', { initialValue: routes });
