@@ -30,6 +30,40 @@ import styles from "./Role.less";
 const FormItem = Form.Item;
 const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;
+
+const CreateOrUpdateForm = Form.create()(props => {
+  const { modalVisible, form, handleAdd, handleModalVisible } = props;
+  const okHandle = () => {
+    form.validateFields((err, fieldsValue) => {
+      if (err) return;
+      form.resetFields();
+      handleAdd(fieldsValue);
+    });
+  };
+  return (
+    <Modal
+      destroyOnClose
+      title="新建规则"
+      visible={modalVisible}
+      onOk={okHandle}
+      onCancel={() => handleModalVisible()}
+    >
+      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="描述">
+        {form.getFieldDecorator("desc", {
+          rules: [
+            {
+              required: true,
+              message: "请输入至少五个字符的规则描述！",
+              min: 5
+            }
+          ]
+        })(<Input placeholder="请输入" />)}
+      </FormItem>
+    </Modal>
+  );
+});
+
+
 @connect(({ role, loading }) => ({
   role,
   loading: loading.models.role
@@ -38,6 +72,7 @@ const Option = Select.Option;
 class Role extends PureComponent {
   state = {
     expandForm: false,
+    modalVisible: false,
     visible: false,
     modalVisible: false,
     selectedRows: [],
@@ -232,23 +267,44 @@ class Role extends PureComponent {
     }
   }
 
+  handleUpdateModalVisible = (flag, record) => {
+    this.setState({
+      updateModalVisible: !!flag,
+      stepFormValues: record || {}
+    });
+  };
+
+  handleAdd = fields => {
+    const { dispatch } = this.props;
+    dispatch({
+      type: "rule/add",
+      payload: {
+        desc: fields.desc
+      }
+    });
+
+    message.success("添加成功");
+    this.handleModalVisible();
+  };
+
   render() {
     const {
       role: { data },
       loading
     } = this.props;
-    const { selectedRows, visible, currentLog } = this.state;
+    const { selectedRows, visible, currentLog, modalVisible } = this.state;
     const modalFooter = { footer: null, onCancel: this.handleDone };
     const getModalContent = () => {
-      return currentLog ? (
-        <div>{this.getFormattedParameters(currentLog)}</div>
-      ) : (
-        <div />
-      );
+      return <div>123</div>
+    };
+
+    const parentMethods = {
+      handleAdd: this.handleAdd,
+      handleModalVisible: this.handleModalVisible
     };
 
     return (
-      <PageHeaderWrapper title="审计日志">
+      <PageHeaderWrapper title="角色">
         <Card bordered={false}>
           <div className={styles.tableList}>
             <div className={styles.tableListForm}>
@@ -267,9 +323,10 @@ class Role extends PureComponent {
             />
           </div>
         </Card>
+        <CreateOrUpdateForm {...parentMethods} modalVisible={modalVisible} />
         <Modal
-          title={"审计日志详情"}
-          // className={styles.standardListForm}
+          title={"修改角色"}
+          className={styles.standardListForm}
           width={640}
           bodyStyle={{ padding: "72px 0" }}
           destroyOnClose
