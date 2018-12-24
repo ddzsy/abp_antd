@@ -43,7 +43,7 @@ const CreateOrUpdateForm = Form.create()(props => {
   return (
     <Modal
       destroyOnClose
-      title="新建规则"
+      title="新建角色"
       visible={modalVisible}
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
@@ -74,7 +74,6 @@ class Role extends PureComponent {
     expandForm: false,
     modalVisible: false,
     visible: false,
-    modalVisible: false,
     selectedRows: [],
     currentLog: undefined
   };
@@ -96,13 +95,7 @@ class Role extends PureComponent {
       width: 220,
       render: (text, record) => (
         <span>
-          <a href="javascript:;">编辑 一 {record.displayName}</a>
-          {/* <Divider type="vertical" />
-          <a href="javascript:;">Delete</a>
-          <Divider type="vertical" />
-          <a href="javascript:;" className="ant-dropdown-link">
-            More actions <Icon type="down" />
-          </a> */}
+          <a onClick={() => this.handleModalVisible(true, record)}>编辑 一 {record.displayName}</a>
         </span>
       )
     }
@@ -111,7 +104,7 @@ class Role extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: "role/fetchRole",
+      type: "role/fetchRoles",
       payload: {
         maxResultCount: 20,
         skipCount: 0
@@ -137,7 +130,7 @@ class Role extends PureComponent {
       formValues: {}
     });
     dispatch({
-      type: "role/fetchRole",
+      type: "role/fetchRoles",
       payload: {
         skipCount: 0,
         maxResultCount: pagination.pageSize || 20
@@ -167,13 +160,29 @@ class Role extends PureComponent {
       });
 
       dispatch({
-        type: "role/fetchRole",
+        type: "role/fetchRoles",
         payload: {
           ...values,
           skipCount: 0,
           maxResultCount: pagination.pageSize || 20
         }
       });
+    });
+  };
+
+  handleModalVisible = (flag, record) => {
+    console.log(`handle modal`);
+    const { dispatch } = this.props;
+
+    this.setState({
+      modalVisible: !!flag,
+      //stepFormValues: record || {}
+    });
+    dispatch({
+      type: "role/fetchRoleForEdit",
+      payload: {
+        id: !record ? undefined : record.id
+      }
     });
   };
 
@@ -203,7 +212,7 @@ class Role extends PureComponent {
     }
 
     dispatch({
-      type: "role/fetchRole",
+      type: "role/fetchRoles",
       payload: params
     });
   };
@@ -267,13 +276,6 @@ class Role extends PureComponent {
     }
   }
 
-  handleUpdateModalVisible = (flag, record) => {
-    this.setState({
-      updateModalVisible: !!flag,
-      stepFormValues: record || {}
-    });
-  };
-
   handleAdd = fields => {
     const { dispatch } = this.props;
     dispatch({
@@ -324,17 +326,7 @@ class Role extends PureComponent {
           </div>
         </Card>
         <CreateOrUpdateForm {...parentMethods} modalVisible={modalVisible} />
-        <Modal
-          title={"修改角色"}
-          className={styles.standardListForm}
-          width={640}
-          bodyStyle={{ padding: "72px 0" }}
-          destroyOnClose
-          visible={visible}
-          {...modalFooter}
-        >
-          {getModalContent()}
-        </Modal>
+
       </PageHeaderWrapper>
     );
   }

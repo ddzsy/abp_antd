@@ -1,4 +1,4 @@
-import { queryRole } from "@/services/role";
+import { queryRole, queryRoleForEdit } from "@/services/role";
 
 export default {
   namespace: "role",
@@ -9,11 +9,14 @@ export default {
       pagination: {
         showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`
       }
-    }
+    },
+    currentRole: {},
+    permissions: [],
+    grantedPermissionNames: []
   },
 
   effects: {
-    *fetchRole({ payload }, { call, put }) {
+    *fetchRoles({ payload }, { call, put }) {
       if (!payload) {
         payload = {
           maxResultCount: 20,
@@ -22,6 +25,8 @@ export default {
       }
 
       const response = yield call(queryRole, payload);
+      console.log(response);
+
       if (response.success) {
         const result = {
           list: response.result.items,
@@ -34,6 +39,25 @@ export default {
         yield put({
           type: "save",
           payload: result
+        });
+      } else {
+        console.log(response);
+      }
+    },
+    *fetchRoleForEdit({ payload }, { call, put }) {
+      if (!payload) {
+        payload = {
+          id: undefined
+        };
+      }
+
+      const response = yield call(queryRoleForEdit, payload);
+      console.log(response);
+
+      if (response.success) {
+        yield put({
+          type: "saveRole",
+          payload: response.result
         });
       } else {
         console.log(response);
@@ -51,6 +75,14 @@ export default {
         total: action.payload.pagination.total
       };
       return newState;
+    },
+    saveRole(state, action) {
+      return {
+        ...state,
+        currentRole: action.payload.role,
+        permissions: action.payload.permissions,
+        grantedPermissionNames: action.payload.grantedPermissionNames,
+      };
     }
   }
 };
