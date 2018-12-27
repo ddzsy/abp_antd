@@ -2,9 +2,11 @@ import React, { PureComponent, Fragment } from "react";
 import { connect } from "dva";
 import moment from "moment";
 import {
+  Alert,
   Row,
   Col,
   Tag,
+  Tabs,
   Card,
   Form,
   Input,
@@ -12,6 +14,7 @@ import {
   Icon,
   Button,
   Dropdown,
+  Tree,
   Menu,
   InputNumber,
   DatePicker,
@@ -20,7 +23,8 @@ import {
   Badge,
   Divider,
   Steps,
-  Radio
+  Radio,
+  Checkbox
 } from "antd";
 import StandardTable from "@/components/StandardTable";
 import PageHeaderWrapper from "@/components/PageHeaderWrapper";
@@ -30,6 +34,9 @@ import styles from "./Role.less";
 const FormItem = Form.Item;
 const RangePicker = DatePicker.RangePicker;
 const Option = Select.Option;
+const TabPane = Tabs.TabPane;
+const DirectoryTree = Tree.DirectoryTree;
+const { TreeNode } = Tree;
 
 const CreateOrUpdateForm = Form.create()(props => {
   const { modalVisible, form, handleAdd, handleModalVisible } = props;
@@ -40,25 +47,71 @@ const CreateOrUpdateForm = Form.create()(props => {
       handleAdd(fieldsValue);
     });
   };
+  renderTreeNodes = data => data.map((item) => {
+    if (item.children) {
+      return (
+        <TreeNode title={item.title} key={item.key} dataRef={item}>
+          {this.renderTreeNodes(item.children)}
+        </TreeNode>
+      );
+    }
+    return <TreeNode {...item} />;
+  })
   return (
     <Modal
       destroyOnClose
+      style={{ top: 20 }}
+      width={800}
+      bodyStyle={{ paddingTop: 15 }}
       title="新建角色"
       visible={modalVisible}
       onOk={okHandle}
       onCancel={() => handleModalVisible()}
     >
-      <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="描述">
-        {form.getFieldDecorator("desc", {
-          rules: [
-            {
-              required: true,
-              message: "请输入至少五个字符的规则描述！",
-              min: 5
-            }
-          ]
-        })(<Input placeholder="请输入" />)}
-      </FormItem>
+      <Tabs defaultActiveKey="1">
+        <TabPane tab={<span><Icon type="info" />角色属性</span>} key="1">
+          <FormItem labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} style={{ paddingTop: 10 }} label="角色名称">
+            {form.getFieldDecorator("displayName", {
+              rules: [
+                {
+                  required: true,
+                  message: "请输入角色名称",
+                  min: 2
+                }
+              ]
+            })(<Input placeholder="请输入" />)}
+          </FormItem>
+          <Form.Item labelCol={{ span: 5 }} wrapperCol={{ span: 15 }} label="默认" extra="新用户将默认拥有此角色.">
+            {form.getFieldDecorator("isDefault", {
+              rules: [
+              ]
+            })(<Checkbox></Checkbox>)}
+          </Form.Item>
+          <Alert
+            message="提示"
+            description="如果您正在更改自己的权限，则可能需要刷新页面（F5），以在您所做的权限更改生效！"
+            type="warning"
+            showIcon
+          />
+        </TabPane>
+        <TabPane tab={<span><Icon type="security-scan" />权限</span>} key="2">
+          <DirectoryTree
+            multiple
+            checkable
+            defaultExpandAll
+          >
+            <TreeNode title="parent 0" key="0-0">
+              <TreeNode title="leaf 0-0" key="0-0-0" isLeaf />
+              <TreeNode title="leaf 0-1" key="0-0-1" isLeaf />
+            </TreeNode>
+            <TreeNode title="parent 1" key="0-1">
+              <TreeNode title="leaf 1-0" key="0-1-0" isLeaf />
+              <TreeNode title="leaf 1-1" key="0-1-1" isLeaf />
+            </TreeNode>
+          </DirectoryTree>
+        </TabPane>
+      </Tabs>
+
     </Modal>
   );
 });

@@ -25,6 +25,7 @@ export default {
       }
 
       const response = yield call(queryRole, payload);
+      console.log(payload);
       console.log(response);
 
       if (response.success) {
